@@ -1,0 +1,14 @@
+Training Misclassification Error = 0.2393
+Test Misclassification Error = 0.2271
+
+Training Confusion matrix:
+[289	50]
+[79	121]
+
+Test Confusion matrix:
+[138	23]
+[29	39]
+
+Sensitivity = 0.8263
+Specificity = 0.6290
+

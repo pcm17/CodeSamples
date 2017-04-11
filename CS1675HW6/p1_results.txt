@@ -1,0 +1,16 @@
+Iterations = 2000	Learning Rate = 2 / sqrt(i)
+
+Training Misclassification Error = 0.2245
+Test Misclassification Error = 0.1878
+
+Training Confusion matrix:
+[303	36]
+[85	115]
+
+Test Confusion matrix:
+[143	18]
+[25	43]
+
+Sensitivity = 0.8512
+Specificity = 0.7049
+
