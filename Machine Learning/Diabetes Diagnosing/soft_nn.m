@@ -5,7 +5,7 @@ function [y_pred] = soft_nn(x, y, xn, h)
 %               2. Training Classes
 %               3. Single Test data point Predictors
 %               4. Gaussian Smoothness Parameter
-% Returns: Class Prediction
+% Returns:  Class Prediction
 
 N = size(x,1);
 vote1 = 0;
