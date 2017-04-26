@@ -1,5 +1,6 @@
-%%% kNN classifier for pima
+%%% Experiments with a kNN Classifier for diabetes classification
 %%% *************************************************************
+%%% Peter McCloskey
 %%% CS1675 Intro to Machine Learning, University of Pittsburgh
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
