@@ -1,4 +1,8 @@
-
+%%% Experiments with Naive Bayes classifier for diabetes classification
+%%% *************************************************************
+%%% Peter McCloskey
+%%% CS 1675 Intro to Machine Learning, University of Pittsburgh
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 y_train_pred_NB = predict_NB(X_train, exp_0_1_mu, exp_1_1_mu, norm_0_2_mu, norm_0_2_sigma, norm_1_2_mu, norm_1_2_sigma, norm_0_3_mu, norm_0_3_sigma,norm_1_3_mu, norm_1_3_sigma, norm_0_4_mu, norm_0_4_sigma, norm_1_4_mu, norm_1_4_sigma, exp_0_5_mu, exp_1_5_mu, norm_0_6_mu, norm_0_6_sigma, norm_1_6_mu, norm_1_6_sigma,exp_0_7_mu, exp_1_7_mu, exp_0_8_mu, exp_1_8_mu, prior_y0, prior_y1);
 y_test_pred_NB = predict_NB(X_test, exp_0_1_mu, exp_1_1_mu, norm_0_2_mu, norm_0_2_sigma, norm_1_2_mu, norm_1_2_sigma, norm_0_3_mu, norm_0_3_sigma,norm_1_3_mu, norm_1_3_sigma, norm_0_4_mu, norm_0_4_sigma, norm_1_4_mu, norm_1_4_sigma, exp_0_5_mu, exp_1_5_mu, norm_0_6_mu, norm_0_6_sigma, norm_1_6_mu, norm_1_6_sigma,exp_0_7_mu, exp_1_7_mu, exp_0_8_mu, exp_1_8_mu, prior_y0, prior_y1);
 
