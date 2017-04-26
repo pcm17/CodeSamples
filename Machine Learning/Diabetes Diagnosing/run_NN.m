@@ -26,11 +26,11 @@ y_test=test_data(:,data_col);
 % defines the number of hidden layers
 layers = [1 2 5 10 20];
 nLoops=length(layers);
-nRepeats = 7;
-%% Loops nLoops times to experiment with different numbers of hidden layers
+nReps = 7;
+%% Loops nLoops*nReps times to experiment with different numbers of hidden layers
 
 for i = 1:nLoops
-    for j = 1:nRepeats
+    for j = 1:nReps
     %%% training of the neural net
 
     %%% builds a layered neural network with a sigmoidal output function

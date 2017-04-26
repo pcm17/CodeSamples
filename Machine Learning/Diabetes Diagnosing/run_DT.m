@@ -22,14 +22,13 @@ y=tr_data(:,data_col);
 x_test = test_data(:,1:n_features);
 %% builds y vector for the test set
 y_test=test_data(:,data_col);
-%%%% new tree with restrictions on the tree size, parent size, and leaf sizes 
-%%%% learns a tree with at most 25 splits, such that any parent node 
-%%%% has at least 10 examples and any leaf has at least 2 examples
 
-    new_tree=fitctree(x,y, 'NumVariablesToSample',10,'MinParentSize',20,'MinLeafSize',16,'splitcriterion','gdi');
-    y_pred=predict(new_tree,x_test);
-    error = sum(abs(y_pred-y_test))/size(y_test,1);
-    
+%%%% new tree with restrictions on the tree size, parent size, and leaf sizes 
+new_tree=fitctree(x,y, 'NumVariablesToSample',10,'MinParentSize',20,'MinLeafSize',16,'splitcriterion','gdi');
+y_pred=predict(new_tree,x_test);
+error = sum(y_pred~=y_test)/size(y_test,1);
+fprintf('\nDecision Tree Error = %.2f\n',error*100);
+
 
 %plot(leafs,error);
 %xlabel('NumVariablesToSample');
