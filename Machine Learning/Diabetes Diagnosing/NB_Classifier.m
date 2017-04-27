@@ -3,6 +3,26 @@
 %%% Peter McCloskey
 %%% CS 1675 Intro to Machine Learning, University of Pittsburgh
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Load diabetes data
+train_data = load('pima_train.txt');
+test_data = load('pima_test.txt');
+num_features = size(train_data,2) - 1;
+X_train = train_data(:,1:num_features);
+X_test = test_data(:,1:num_features);
+y_train = train_data(:,num_features+1);
+y_test = test_data(:,num_features+1);
+class_1_train_data = train_data(train_data(:,num_features+1) == 1,1:num_features);
+class_0_train_data = train_data(train_data(:,num_features+1) == 0,1:num_features);
+
+% Compute Parameter Estimates
+[exp_0_1_mu, exp_1_1_mu, norm_0_2_mu, norm_0_2_sigma, norm_1_2_mu, ... 
+    norm_1_2_sigma, norm_0_3_mu, norm_0_3_sigma, norm_1_3_mu, norm_1_3_sigma, ...
+    norm_0_4_mu, norm_0_4_sigma, norm_1_4_mu,norm_1_4_sigma, exp_0_5_mu, ...
+    exp_1_5_mu, norm_0_6_mu, norm_0_6_sigma, norm_1_6_mu,norm_1_6_sigma, ...
+    exp_0_7_mu, exp_1_7_mu, exp_0_8_mu, exp_1_8_mu, prior_y1, prior_y0] ...
+    = Compute_NB_Parameter_Estimates (class_0_train_data, class_1_train_data);
+% Predict class
 y_train_pred_NB = predict_NB(X_train, exp_0_1_mu, exp_1_1_mu, norm_0_2_mu, norm_0_2_sigma, norm_1_2_mu, norm_1_2_sigma, norm_0_3_mu, norm_0_3_sigma,norm_1_3_mu, norm_1_3_sigma, norm_0_4_mu, norm_0_4_sigma, norm_1_4_mu, norm_1_4_sigma, exp_0_5_mu, exp_1_5_mu, norm_0_6_mu, norm_0_6_sigma, norm_1_6_mu, norm_1_6_sigma,exp_0_7_mu, exp_1_7_mu, exp_0_8_mu, exp_1_8_mu, prior_y0, prior_y1);
 y_test_pred_NB = predict_NB(X_test, exp_0_1_mu, exp_1_1_mu, norm_0_2_mu, norm_0_2_sigma, norm_1_2_mu, norm_1_2_sigma, norm_0_3_mu, norm_0_3_sigma,norm_1_3_mu, norm_1_3_sigma, norm_0_4_mu, norm_0_4_sigma, norm_1_4_mu, norm_1_4_sigma, exp_0_5_mu, exp_1_5_mu, norm_0_6_mu, norm_0_6_sigma, norm_1_6_mu, norm_1_6_sigma,exp_0_7_mu, exp_1_7_mu, exp_0_8_mu, exp_1_8_mu, prior_y0, prior_y1);
 
@@ -10,17 +30,19 @@ y_test_pred_NB = predict_NB(X_test, exp_0_1_mu, exp_1_1_mu, norm_0_2_mu, norm_0_
 traine_NB = immse(y_train_pred_NB,y_train);
 teste_NB = immse(y_test_pred_NB,y_test);
 
+% Compute confusion matrix
 confuse_train = confusion_matrix(y_train, y_train_pred_NB, 2);
 confuse_test = confusion_matrix(y_test, y_test_pred_NB, 2);
 
+% Compute sensitivity and specificity
 sens = confuse_test(1,1) / (confuse_test(1,1) + confuse_test(2,1));
 spec = confuse_test(2,2) / (confuse_test(2,2) + confuse_test(1,2));
 
-fileId = fopen('p2_results.txt','w');
-fprintf(fileId,'Training Misclassification Error = %.4f\nTest Misclassification Error = %.4f\n\n',traine_NB, teste_NB);
-fprintf(fileId, 'Training Confusion matrix:\n[%d\t%d]\n[%d\t%d]\n\n',confuse_train');
-fprintf(fileId, 'Test Confusion matrix:\n[%d\t%d]\n[%d\t%d]\n\n',confuse_test');
-fprintf(fileId, 'Sensitivity = %.4f\nSpecificity = %.4f\n\n', sens, spec);
+% Display results
+fprintf('Training Misclassification Error = %.4f\nTest Misclassification Error = %.4f\n\n',traine_NB, teste_NB);
+fprintf( 'Training Confusion matrix:\n[%d\t%d]\n[%d\t%d]\n\n',confuse_train);
+fprintf( 'Test Confusion matrix:\n[%d\t%d]\n[%d\t%d]\n\n',confuse_test);
+fprintf( 'Sensitivity = %.4f\nSpecificity = %.4f\n\n', sens, spec);
 
 function [y_pred] = predict_NB(X, exp_0_1_mu, exp_1_1_mu, norm_0_2_mu, norm_0_2_sigma, norm_1_2_mu, norm_1_2_sigma, norm_0_3_mu, norm_0_3_sigma,norm_1_3_mu, norm_1_3_sigma, norm_0_4_mu, norm_0_4_sigma, norm_1_4_mu, norm_1_4_sigma, exp_0_5_mu, exp_1_5_mu, norm_0_6_mu, norm_0_6_sigma, norm_1_6_mu, norm_1_6_sigma,exp_0_7_mu, exp_1_7_mu, exp_0_8_mu, exp_1_8_mu, prior_y0, prior_y1)
 % Makes class prediction based on model parameters
@@ -59,21 +81,6 @@ for i = 1:size(X,1)
     if prob1 > prob0
         y_pred(i,1) = 1;
     end
-end
-
-end
-
-function [ confuse_matrix ] = confusion_matrix( y_true, y_pred, num_classes )
-%UNTITLED3 Summary of this function goes here
-%   Detailed explanation goes here
-
-m = length(y_true);
-confuse_matrix = zeros(num_classes,num_classes);            % Initialize and num_classes x num_classes matrix of zeros 
-
-for i = 1:m
-    true = y_true(i) + 1;
-    predict = y_pred(i) + 1;        % Need +1 because matlab does not use 0 as first index
-    confuse_matrix(true,predict) = confuse_matrix(true,predict) + 1;
 end
 
 end
