@@ -1,3 +1,8 @@
+%%% Expirements with Logistic Regression using batch gradient descent
+%%% ****************************************************************
+%%% Peter McCloskey
+%%% CS 1675 Intro to Machine Learning, University of Pittsburgh 2017
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 test_data = load('data/classification_test.txt');
 train_data = load('data/classification_train.txt');
 
@@ -7,9 +12,9 @@ X_test = test_data(:,1:2);
 y_test = test_data(:,3);
 y_train = train_data(:,3);
 
-iterations = 500;                        % Set number of iterations
+iterations = 500;                      % Set number of iterations
 w = ones(size(X_train,2),1);           % Initialize all weights to 0
-pgraph = init_progress_graph;           % Initialize graph
+pgraph = init_progress_graph;          % Initialize graph
 
 for iteration = 1:iterations
     [ w ] = GLR( X_train, y_train, w, iteration );

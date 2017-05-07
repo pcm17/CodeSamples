@@ -1,8 +1,8 @@
 %%% Experiments with Naive Bayes classifier for diabetes classification
-%%% *************************************************************
+%%% ****************************************************************
 %%% Peter McCloskey
-%%% CS 1675 Intro to Machine Learning, University of Pittsburgh
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% CS 1675 Intro to Machine Learning, University of Pittsburgh 2017
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Load diabetes data
 train_data = load('pima_train.txt');

@@ -1,3 +1,9 @@
+%%% Experiments with dimensionality reduction using Fischer score, AUROC
+%%% score, and wrapper methods
+%%% ****************************************************************
+%%% Peter McCloskey
+%%% CS 1675 Intro to Machine Learning, University of Pittsburgh 2017
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Data = load('Data.txt');
 runs = 1;
 for n = 1:runs
@@ -10,26 +16,29 @@ Fischer_scores = zeros(numFeats,2);
 indx_AUROC = zeros(1,numFeats);
 indx_Fischer = zeros(1,numFeats);
 
+% Partition data into predictors and classes
 X = data(:,1:numFeats);
 %X = X(:,randperm(size(X,2)));
 Y = data(:,numFeats+1);
 
+% Partition data into training and test sets using holdout method
 holdoutCVP = cvpartition(Y,'holdout',round((1/3)*size(Y,1)));
 
+% Training data
 tr_data = data(holdoutCVP.training,:);
-tr_x = tr_data(:,1:numFeats);
-tr_y= tr_data(:,numFeats+1);
-
+tr_x = tr_data(:,1:numFeats);   tr_y= tr_data(:,numFeats+1);
+% Test data
 test_data = data(holdoutCVP.test,:);
-test_x = test_data(:,1:numFeats);
-test_y= test_data(:,numFeats+1);
+test_x = test_data(:,1:numFeats);   test_y= test_data(:,numFeats+1);
 
+% Write training and test data out to separate files
 dlmwrite('training_data.txt',tr_data,'delimiter',' ','precision',10);
 dlmwrite('test_data.txt',test_data,'delimiter',' ','precision',10);
 
 classf = @(xtrain,ytrain,xtest,ytest) ...
              sum(ytest ~= classify(xtest,xtrain,ytrain,'linear'));
-         
+
+% Determine indices to keep using the wrapper method          
 indx_wrap = wrapper_function(tr_data, classf);
 num_dim = sum(indx_wrap);
 
@@ -87,54 +96,17 @@ C_Fischer = confusionmat(test_y,y_pred_Fischer);
 C_reg = confusionmat(test_y,y_pred);
 
 fprintf('\n\nAUROC Conf:\n');
-fprintf('%d\t%d\n',C_AUROC');
+fprintf('%d\t%d\n',C_AUROC);
 fprintf('AUROC error = %.2f\n', mean(err_AUROC*100));
 
 fprintf('\n\nFisher Conf:\n');
-fprintf('%d\t%d\n',C_Fischer');
+fprintf('%d\t%d\n',C_Fischer);
 fprintf('Fischer error = %.2f\n', mean(err_Fischer*100));
 
 fprintf('\n\nWrapper Conf:\n');
-fprintf('%d\t%d\n',C_wrap');
+fprintf('%d\t%d\n',C_wrap);
 fprintf('Wrapper error = %.2f\n', mean(err_wrap*100));
 
 fprintf('\n\nRegular Conf:\n');
-fprintf('%d\t%d\n',C_reg');
+fprintf('%d\t%d\n',C_reg);
 fprintf('Regular error = %.2f\n', mean(err*100));
-%%
-function output = wrapper_function(tr_data, classf)
-
-numFeats = size(tr_data,2)-1;
-grpTrain = tr_data(:,numFeats+1);
-dataTrain = tr_data(:,1:numFeats);
-
-threeFoldCVP = cvpartition(grpTrain,'kfold',3);
-output = sequentialfs(classf,dataTrain,grpTrain,...
-    'cv',threeFoldCVP);
-end
-
-
-function score = AUROC_score(x, y)
-
-mdl = fitglm(x,y);
-predictions = predict(mdl,x);
-[X,Y,T,AUC] = perfcurve(y,predictions,'1');
-score = AUC;
-
-end
-
-function score = Fischer_score(x, y)
-
-% Split positive and negative examples
-pos_ex = x(y == 1);
-neg_ex = x(y == 0);
-
-% Calculate mean
-mu_pos = mean(pos_ex);
-mu_neg = mean(neg_ex);
-
-sigma_pos = var(pos_ex);
-sigma_neg = var(neg_ex);
-
-score = (mu_pos - mu_neg)^2/(sigma_pos + sigma_neg);
-end
