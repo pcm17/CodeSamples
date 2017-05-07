@@ -1,10 +1,10 @@
 clear all
 
-main1;
-main2_1;
-main2_2;
-main2_3;
-main3_1;
+Logistic_Regression_Batch_GD;
+Distribution_Analysis;
+Compute_NB_Parameter_Estimates;
+NB_Predict_Class;
+SVM_Binary_Classifier;
 
 [X_LR,Y_LR,~,AUC_LR] = perfcurve(y_train, y_train_pred_LR(:),1);
 [X_NB,Y_NB,~,AUC_NB] = perfcurve(y_train, y_train_pred_NB(:),1);

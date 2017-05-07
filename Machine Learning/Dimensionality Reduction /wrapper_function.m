@@ -1,10 +1,12 @@
-function output = wrapper_function(tr_data, classf)
+function IDX = wrapper_function(data, classf)
+%%% Wrapper method to reduce the dimensionality of a data set
+% Arguments:    1. data set
+%               2. classification function
+% Returns:  indices of features to keep
+numFeats = size(data,2)-1;
+Y = data(:,numFeats+1);
+X = data(:,1:numFeats);
 
-numFeats = size(tr_data,2)-1;
-grpTrain = tr_data(:,numFeats+1);
-dataTrain = tr_data(:,1:numFeats);
-
-threeFoldCVP = cvpartition(grpTrain,'kfold',3);
-output = sequentialfs(classf,dataTrain,grpTrain,...
-    'cv',threeFoldCVP);
+threeFoldCVP = cvpartition(Y,'kfold',3);
+IDX = sequentialfs(classf,X,Y,'cv',threeFoldCVP);
 end

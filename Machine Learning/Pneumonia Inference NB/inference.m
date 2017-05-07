@@ -4,7 +4,7 @@ num_features = size(data,2);
 num_samples = size(data,1);
 % Run learning script to ensure class conditional probabilities are
 % calculated
-main8_2learning
+learning
 
 % Loop through all samples and choose the class conditional probability for
 % each symptom/feature (fever,cough,etc.) based on whether that symptom is present in the sample. 
@@ -56,6 +56,6 @@ for i = 1:num_samples
         predict_pneum1 = sum(predict_pneum1);
         predict_pneum0 = sum(predict_pneum0);
     end
-    p_pneum_infer(i,1) = predict_pneum1/(predict_pneum1+predict_pneum0)
+    p_pneum_infer(i,1) = predict_pneum1/(predict_pneum1+predict_pneum0);
         
 end

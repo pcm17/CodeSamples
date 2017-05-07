@@ -1,5 +1,5 @@
-test_data = load('classification_test.txt');
-train_data = load('classification_train.txt');
+test_data = load('data/classification_test.txt');
+train_data = load('data/classification_train.txt');
 
 
 X_train = train_data(:,1:2);
