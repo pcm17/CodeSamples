@@ -1,6 +1,5 @@
- test_data = load('classification_test.txt');
-train_data = load('classification_train.txt');
-
+test_data = load('data/classification_test.txt');
+train_data = load('data/classification_train.txt');
 
 X_train = train_data(:,1:2);
 X_train = [X_train; X_train];
@@ -25,8 +24,6 @@ for iteration = 1:iterations
     
     W = Log_regression(X_train, y_train, W, iteration);
     
-    
-    
     if mod(iteration,50) == 0                   % Plot progress
         y_train_pred = sigmoid(X_train*W);
         traine = immse(y_train, y_train_pred);
@@ -39,8 +36,6 @@ end
 
 % Make predictions for training data
 y_train_pred = round(sigmoid(X_train*W));
-
-
 
 % Make predictions for test data
 y_test_pred = round(sigmoid(X_test*W));
@@ -59,7 +54,6 @@ mean_train_error = sum(abs(y_train-round(y_train_pred)))/size(y_train_pred,1)
 mean_test_error = sum(abs(y_test-round(y_test_pred)))/size(y_test_pred,1)
 
 function W = Log_regression(X, Y, W, k)
-
     sum_err = 0;                    %%% initialize batch error function gradient
     for row = 1:1:size(X, 1)
         x = X(row,:)';
