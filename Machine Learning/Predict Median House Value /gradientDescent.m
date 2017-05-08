@@ -1,17 +1,24 @@
 function [ w ] = gradientDescent( X, y, w, iteration )
-% Gradient Descent is used to learn parameters in order to fit a
-% straight line to the points.
+%%% Online gradient descent is used to learn parameters in order to fit a
+%%% straight line to the points.
+%%% Arguments:      1. Train Patterns
+%%%                 2. Train Targets
+%%%                 3. Weights
+%%%                 4. Current iteration number
+%%%
+%%% Returns:        1. Updated Weights
+%%%
+%%% Note: I think this has some issues
 
     m = length(y);              % Number of training examples
     alpha = 2/iteration;        % Recalculate alpha every step
 
-    tempVal = zeros(size(w));  
-    temp = (y - X*w);           
+    error = (y - X*w);           
     
     for i =1:length(w)
-        tempVal(i,1) = sum(temp.*X(:,i));
+        grad(i,1) = sum(error.*X(:,i));
     end
     
-    w = w + (alpha/m)*tempVal;  % Update weights
+    w = w + (alpha/m)*grad;  % Update weights
  
 end
