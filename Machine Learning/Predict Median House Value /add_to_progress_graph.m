@@ -1,12 +1,12 @@
 
-%% graphs the progress of the mean train and test errors for iterative procedures
-% arguments: 1. graph structure
-%            2. step number
-%            3. train error
-%            4. test error
-% returns: updated graph structure
-
 function [pgraph] = add_to_progress_graph(pgraph, step, traine, teste)
+%%% Graphs the progress of the mean train and test errors for iterative procedures
+%%% Arguments: 1. Graph structure
+%%%            2. Step number
+%%%            3. Train error
+%%%            4. Test error
+%%%
+%%% Returns:   1. Updated graph structure
 
 pgraph.step=[pgraph.step step];
 pgraph.train=[pgraph.train traine];

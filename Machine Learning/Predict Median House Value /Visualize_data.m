@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Problem 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-data_train = load('housing.txt');
+data_train = load('data/housing.txt');
 target = 14;
 
 for i = 1:13
@@ -17,7 +17,6 @@ end
 [x_pos y_pos] = find(coef == max(max(coef)));
 [x_neg y_neg] = find(coef == min(min(coef)));
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Problem 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
