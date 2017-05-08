@@ -1,23 +1,20 @@
 function [test_y, E] = Boost_classifier(tr_x, tr_y, test_x, params)
 
 % Classify using the AdaBoost algorithm
-% *** Inputs:
-% 	train_patterns - Train patterns
-%   	train_targets  - Train targets
-%  	test_patterns  -  Test patterns
-%  	params =       
-%  	[base_classifier,   - base classifier
-%  	NumberOfIterations, - number of models
-% 	Classifier_parameters] - additional parameters for the base classifier
+% Arguments:    1. Train patterns
+%               2. Train targets
+%               3. Test patterns
+%               4. params = [base_classifier,
+%                           NumberOfIterations,
+%                           Classifier_parameters]
 %
-% *** Outputs:
-%  test_y	- Predicted targets
-%  E - Errors through the iterations
+% Returns:      1. Predicted targets
+%               2. Errors through iterations
 
 
 [base_classifier, k_max, alg_params] = process_params(params);
 
-[M,N]			= size(tr_x);
+[M,~]			= size(tr_x);
 W			 	= ones(M,1)/M;
 IterDisp		= 10;
 Nc              = length(unique(tr_y));
@@ -26,15 +23,15 @@ full_x   = [tr_x; test_x];
 test_y    = zeros(size(test_x,1),1);
 
 % AdaBoost loop
-for k = 1:k_max,
+for k = 1:k_max
    %Train weak learner Ck using the data sampled according to W:
    %...so sample the data according to W
    randnum = rand(M,1);
    cW	   = cumsum(W);
    indices = zeros(M,1);
-   for i = 1:M,
+   for i = 1:M
       %Find which bin the random number falls into
-      loc = max(find(randnum(i) > cW))+1;
+      loc = find(randnum(i) > cW, 1, 'last' )+1;
       if isempty(loc)
          indices(i) = 1;
       else
@@ -48,7 +45,7 @@ for k = 1:k_max,
    %Ek <- Training error of Ck 
    E(k) = sum(W.*(Ck(1:M) ~= tr_y));
    
-   if (E(k) == 0),
+   if (E(k) == 0)
       break
    end
    
