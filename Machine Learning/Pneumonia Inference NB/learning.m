@@ -1,5 +1,11 @@
+%%% Experiments with diagnosing pneumonia using Naive Bayes
+%%% ****************************************************************
+%%% Peter McCloskey
+%%% CS 1675 Intro to Machine Learning, University of Pittsburgh 2017
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %  Read in data from the file pneumonia.tex
-data = load('pneumonia.txt');
+data = load('data/pneumonia.txt');
 num_features = size(data,2) - 1;
 num_samples = size(data,1);
 X = data(:,1:num_features);

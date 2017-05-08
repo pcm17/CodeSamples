@@ -1,5 +1,11 @@
+%%% Experiments with inferring pneumonia diagnosis using Naive Bayes
+%%% ****************************************************************
+%%% Peter McCloskey
+%%% CS 1675 Intro to Machine Learning, University of Pittsburgh 2017
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Read in data from text file
-data = load('example.txt');
+data = load('data/example.txt');
 num_features = size(data,2);
 num_samples = size(data,1);
 % Run learning script to ensure class conditional probabilities are
