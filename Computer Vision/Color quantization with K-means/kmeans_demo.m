@@ -1,7 +1,6 @@
-% kmeans demo
+% small demo to show how clusters form with various values of k
 
-k = 4;
-
+k = 7;
 N = ceil(50 * rand(100, 2));
 
 figure; hold on
