@@ -1,4 +1,9 @@
 function [edges] = detectEdges(im, threshold)
+%%% Detects edges above the threshold in a given image
+%%% Arguments:      1. image
+%%%                 2. threshold value
+%%%
+%%% Returns:        2. detected edges
     im = im2double(im);
     [dx,dy] = meshgrid(-1:1,-1:1);
     Ix = conv2(dx,rgb2gray(im));

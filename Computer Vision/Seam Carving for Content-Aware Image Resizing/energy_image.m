@@ -1,6 +1,8 @@
-% im is a nrows-x-ncols-x-3 matrix representation of the image
-
 function energyImage = energy_image(im)
+%%% Computes the energy image of a given image
+%%% Arguments:      1. image
+%%%
+%%% Returns:        1. computed energy image
     % Convert image from rgb to gray scale
     gray_im = rgb2gray(im);
     % Convert image from datatype u8-int to double

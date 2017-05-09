@@ -1,5 +1,13 @@
  function [reducedColorImage,reducedEnergyImage] = reduceHeight(im, energyImage)
-    
+%%% Reduces the height of an image and it's energy image by carving seams
+%%% through the lowest energy, horizontal path
+%%% image "lands" in the second image
+%%% Arguments:      1. image
+%%%                 2. energy image
+%%%
+%%% Returns:        1. reduced color image
+%%%                 2. reduced energy image 
+
     % Determine optimal seam based on cumulative minimu energy map
     M = cumulative_minimum_energy_map(energyImage, 'HORIZONTAL');
     seam = find_optimal_horizontal_seam(M);
@@ -15,7 +23,6 @@
     for j = 1:size(seamColumn,1)-2
         % Shift all of the pixels that are below the pixel in
         % the seam up by 1 to remove the seam
-clc
         for i = 2:seamRow(j)
             if seamRow(i) < size(seamRow,1)
                 %im(seamRow(i),j) = im(seamRow(i)+1,j);

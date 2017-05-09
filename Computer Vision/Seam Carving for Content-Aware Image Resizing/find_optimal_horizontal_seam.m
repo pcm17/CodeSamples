@@ -1,8 +1,8 @@
-% Code written for CS1674 by Adriana Kovashka 
-% DO NOT SHARE as students in the next issue might need to implement this
-
 function [horizontalSeam] = find_optimal_horizontal_seam(M)
-
+%%% Finds the optimal horizantal path to carve a seam in the given image
+%%% Arguments:      1. image
+%%%
+%%% Returns:        1. optimal horizontal path
     [num_rows, num_cols] = size(M);
 
     horizontalSeam = zeros(num_cols, 1);

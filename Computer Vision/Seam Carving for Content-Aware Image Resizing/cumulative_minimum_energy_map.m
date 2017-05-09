@@ -1,5 +1,3 @@
-% Code written for CS1674 by Adriana Kovashka 
-% DO NOT SHARE as students in the next issue might need to implement this
 
 function M = cumulative_minimum_energy_map(energyImage, seamDirection)
 
@@ -56,4 +54,5 @@ function M = cumulative_minimum_energy_map(energyImage, seamDirection)
         
         
     end
+end
         

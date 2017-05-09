@@ -1,7 +1,10 @@
 function displaySeam(im, seam, seamDirection)
-    % im is the result of an imread
-    % seam should be the output of find_optimal_vertical_seam or find_optimal_horizontal_seam.
-    % seamDirection should be the strings 'HORIZONTAL' or 'VERTICAL'
+%%% Displays the optimal seam to remove from a given image
+%%% Arguments:      1. image
+%%%                 2. seam path
+%%%                 3. seam direction
+%%%
+%%% Returns:        
     if(strcmp(seamDirection, 'VERTICAL'))
         lineSpec = 'red';
     else 
