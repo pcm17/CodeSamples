@@ -1,9 +1,16 @@
-image_files = dir('*.jpg');   % Read in images from current directory endng in .jpg   
+%%% Experiments with image representation using a filter bank to compare
+%%% images within and between categories
+%%% ****************************************************************
+%%% Peter McCloskey
+%%% CS 1675 Intro to Computer Vision, University of Pittsburgh 2017
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+image_files = dir('filter_images/*.jpg');   % Read in images from current directory endng in .jpg   
 nfiles = length(image_files);    % Number of files found in MATLAB folder
 
 image = cell(nfiles,1);
 for i=1:nfiles
-   current_filename = image_files(i).name;
+   current_filename = ['filter_images/' image_files(i).name];
    current_image = imread(current_filename);
    gray_image = rgb2gray(current_image);
    % First the image is resized to 512x512, then reduced in size by 1/2

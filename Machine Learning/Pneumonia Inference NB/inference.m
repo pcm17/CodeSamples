@@ -1,4 +1,4 @@
-%%% Experiments with inferring pneumonia diagnosis using Naive Bayes
+%%% Experiments with pneumonia diagnosis using Naive Bayes inference
 %%% ****************************************************************
 %%% Peter McCloskey
 %%% CS 1675 Intro to Machine Learning, University of Pittsburgh 2017

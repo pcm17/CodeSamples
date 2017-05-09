@@ -1,8 +1,8 @@
-% Code written for CS1674 by Adriana Kovashka 
-% DO NOT SHARE as students in the next issue might need to implement this
-
 function [verticalSeam] = find_optimal_vertical_seam(M)
-
+%%% Finds the optimal vertical path to carve a seam in the given image
+%%% Arguments:      1. image
+%%%
+%%% Returns:        1. optimal vertical path
     [num_rows, num_cols] = size(M);
 
     verticalSeam = zeros(num_rows, 1);
