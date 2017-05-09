@@ -1,5 +1,10 @@
 function H = compute_homography(A, B)
-    
+%%% Computes homography between keypoints in two images
+%%% clustering algorithm
+%%% Arguments:      1. points from first image
+%%%                 2. points from second image
+%%%
+%%% Returns:        1. homography 
     assert(size(A, 2) == 2);
     assert(size(B, 2) == 2);
     assert(size(A, 1) == size(B, 1));
@@ -15,6 +20,6 @@ function H = compute_homography(A, B)
         eq = [eq; temp];
     end
     
-    [U, D, V] = svd(eq);
+    [~, ~, V] = svd(eq);
     H = V(:, end);
     H = reshape(H, 3, 3)';
