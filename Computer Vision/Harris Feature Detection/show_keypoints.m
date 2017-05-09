@@ -1,19 +1,34 @@
-function show_keypoints()
-    clc;
-    image_files = dir('*.jpg');      
-    nfiles = length(image_files);    % Number of files found in MATLAB folder
+%%% Experiments with feature extraction using the Harris corner detector
+%%% ****************************************************************
+%%% Peter McCloskey
+%%% CS 1675 Intro to Computer Vision, University of Pittsburgh 2017
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    for i=1:nfiles
-        image = imread(image_files(i).name);
-        [X, Y, scores, Ix, Iy] = extract_keypoints(image);
-        
-    end
-    
-    
-    [X, Y, scores] = compute_features(X, Y, scores, Ix, Iy);
-    
+%%% Need to fix some stuff - the feature descriptors for keypoints are not 
+%%% computed and returned by the compute_features function
+
+image_files = dir('*.jpg');      
+nfiles = length(image_files);    % Number of files found in MATLAB folder
+nfiles = 1;
+for i=1:nfiles
+    image = imread(image_files(i).name);
+    [X, Y, scores, Ix, Iy] = extract_keypoints(image);
+
 end
+
+
+[X, Y, scores] = compute_features(X, Y, scores, Ix, Iy);
+    
+
 function [X, Y, scores, Ix, Iy] = extract_keypoints(image)
+%%% Computes the keypoints in an image using Harris feature detection
+%%% Arguments:      1. original image
+%%%
+%%% Returns:        1. X values for keypoints
+%%%                 2. Y values for keypoints
+%%%                 3. keypoint scores
+%%%                 4. X directed gradient values for each pixel
+%%%                 5. Y directed gradient values for each pixel
     k = 0.04;
     Threshold = 0.25;
 
@@ -71,11 +86,24 @@ end
 % features is an nxd matix, each row of which contains the d-dimensional descriptor for the n-th keypoint
 function [X, Y, scores] = compute_features(X, Y, scores, Ix, Iy)
 %function [features, x, y, scores] = compute_features(x, y, scores, Ix, Iy)
+%%% Computes the feature descriptors of keypoints using gradient magnitudes and
+%%% angles 
+%%% Arguments:      1. X values for keypoints
+%%%                 2. Y values for keypoints
+%%%                 3. keypoint scores
+%%%                 4. X directed gradient values for each pixel
+%%%                 5. Y directed gradient values for each pixel
+%%%
+%%% Returns:        1. X values for keypoints
+%%%                 2. Y values for keypoints
+%%%                 3. keypoint scores
+%%%                 4. keypoint feature descriptors
+
    % 8 Dimensional Descriptor
     descriptor = zeros(8,size(scores,1));
-    
-    for i=1:size(Ix,1), % Rows
-        for j=1:size(Ix,2), % Columns
+    features = zeros(size(scores,1),8);
+    for i=1:size(Ix,1) % Rows
+        for j=1:size(Ix,2) % Columns
             grad_mag = sqrt(Ix(i, j)^2 + Iy(i, j)^2); 
             orient_raw = atand(Iy(i, j) / Ix(i, j)); 
             if(isnan(orient_raw)) 

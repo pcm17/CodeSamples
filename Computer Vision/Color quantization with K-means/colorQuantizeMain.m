@@ -3,7 +3,6 @@
 %%% Peter McCloskey
 %%% CS 1675 Intro to Computer Vision, University of Pittsburgh 2017
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 clc;
 original_image = imread('fish.jpg');
 figure; imshow(original_image);
