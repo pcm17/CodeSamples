@@ -1,4 +1,4 @@
-function energyImage = energy_image(im)
+function Gmag = energy_image(im)
 %%% Computes the energy image of a given image
 %%% Arguments:      1. image
 %%%
@@ -7,10 +7,10 @@ function energyImage = energy_image(im)
     gray_im = rgb2gray(im);
     % Convert image from datatype u8-int to double
     gray_im = im2double(gray_im);
-    s = [1 2 1; 0 0 0; -1 -2 -1];
-    % Convolve in both horizontal and vertical directions using filter s
-    H = conv2(gray_im,s);
-    V = conv2(gray_im,s');
-    % Generate energy image
-    energyImage = sqrt(H.^2 + V.^2);
+     [Gx, Gy] = imgradientxy(gray_im);
+    [Gmag, Gdir] = imgradient(Gx, Gy);
+    %figure, imshow(Gmag, []), title('Gradient magnitude')
+    %figure, imshow(Gdir, []), title('Gradient direction')
+    %figure, imshow(Gx, []), title('Directional gradient: X axis')
+    %figure, imshow(Gy, []), title('Directional gradient: Y axis')
 end 

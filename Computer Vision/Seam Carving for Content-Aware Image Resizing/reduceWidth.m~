@@ -11,7 +11,7 @@ function [reducedColorImage,reducedEnergyImage] = reduceWidth(im, energyImage)
     % Determine optimal seam based on cumulative minimu energy map
     M = cumulative_minimum_energy_map(energyImage, 'VERTICAL');
     seam = find_optimal_vertical_seam(M);
-    
+    %{
     row = reducedColorImage(1,:,:);
     row(:,seam(1),:) = [];
     newI = row;
@@ -22,7 +22,7 @@ function [reducedColorImage,reducedEnergyImage] = reduceWidth(im, energyImage)
         newI= [newI; row];
     end
     %}
-    reducedColorImage = newI;
+    reducedColorImage = 
     reducedEnergyImage = energy_image(reducedColorImage);
 
 end 

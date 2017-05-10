@@ -4,18 +4,25 @@ function displaySeam(im, seam, seamDirection)
 %%%                 2. seam path
 %%%                 3. seam direction
 %%%
-%%% Returns:        
+%%% Returns:
     if(strcmp(seamDirection, 'VERTICAL'))
-        lineSpec = 'red';
+        rows = linspace(1,length(seam),length(seam))
+        lineSpec = 'yellow';
+         % Display image with seem ontop of it
+        figure,imshow(im)
+        hold on;
+        plot(seam,rows, lineSpec);
+        hold off;
     else 
         assert(strcmp(seamDirection, 'HORIZONTAL'));
-       lineSpec = 'blue';
+        cols = linspace(1,length(seam),length(seam));
+        lineSpec = 'red';
+         % Display image with seem ontop of it
+        figure, imshow(im)
+        hold on;
+        plot(cols,seam, lineSpec);
+        hold off;
     end
-    
-    % Display image with seem ontop of it
-    imshow(im)
-    hold on;
-    [x,y] = ind2sub(size(seam), seam);
-    plot(seam, lineSpec);
-    hold off;
 end
+    
+   
